@@ -1,0 +1,32 @@
+public class PassagemPorValor {
+
+    // Método que recebe um parâmetro inteiro
+    public static void alterarNumero(int x) {
+        System.out.println("   Dentro do método alterarNumero:");
+        System.out.println("   Valor recebido (antes da alteração): " + x);
+        
+        // Alterando o valor do parâmetro
+        x = x + 100;
+        
+        System.out.println("   Valor após alteração: " + x);
+        System.out.println("   Fim do método alterarNumero.\n");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== DEMONSTRAÇÃO DE PASSAGEM POR VALOR ===\n");
+        
+        // Variável original no main
+        int numero = 50;
+        
+        System.out.println("No método main:");
+        System.out.println("Valor ANTES de chamar o método: " + numero);
+        
+        // Chamada do método
+        alterarNumero(numero);
+        
+        System.out.println("No método main:");
+        System.out.println("Valor DEPOIS de chamar o método: " + numero);
+        
+        System.out.println("========================================");
+    }
+}
