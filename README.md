@@ -1,2 +1,2 @@
 # lnpg-cap9-subprogramas-diogo-henrique
-Atividade 07 LNPG
+Diogo Henrique - BSI 2026.1
