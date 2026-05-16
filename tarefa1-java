@@ -1,0 +1,137 @@
+import java.util.Scanner;
+
+public class ControleAcademico {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String[] nomes = new String[5];
+        double[][] notas = new double[5][3];
+        double[] medias = new double[5];
+        String[] situacoes = new String[5];
+
+        // Leitura dos dados
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("=== Aluno %d ===%n", i + 1);
+            System.out.print("Nome: ");
+            nomes[i] = sc.nextLine();
+
+            System.out.println("Digite as 3 notas:");
+            for (int j = 0; j < 3; j++) {
+                System.out.printf("Nota %d: ", j + 1);
+                notas[i][j] = sc.nextDouble();
+            }
+            sc.nextLine(); // consumir quebra de linha
+        }
+
+        // Cálculo das médias e situação
+        for (int i = 0; i < 5; i++) {
+            medias[i] = (notas[i][0] + notas[i][1] + notas[i][2]) / 3.0;
+
+            if (medias[i] >= 7.0) {
+                situacoes[i] = "APROVADO";
+            } else if (medias[i] >= 5.0) {
+                situacoes[i] = "RECUPERAÇÃO";
+            } else {
+                situacoes[i] = "REPROVADO";
+            }
+        }
+
+        // Relatório final
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("               RELATÓRIO FINAL");
+        System.out.println("=".repeat(50));
+        System.out.printf("%-20s %-8s %s%n", "ALUNO", "MÉDIA", "SITUAÇÃO");
+        System.out.println("-".repeat(50));
+
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("%-20s %-8.2f %s%n", 
+                nomes[i], medias[i], situacoes[i]);
+        }
+        System.out.println("=".repeat(50));
+        
+        sc.close();
+    }
+}
+________________________________________________________________________________________________________________
+  import java.util.Scanner;
+
+public class ControleAcademicoRefatorado {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String[] nomes = new String[5];
+        double[][] notas = new double[5][3];
+        double[] medias = new double[5];
+        String[] situacoes = new String[5];
+
+        // Leitura dos alunos
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("=== Aluno %d ===%n", i + 1);
+            nomes[i] = lerAluno(sc);
+            notas[i] = lerNotas(sc);
+        }
+
+        // Processamento
+        for (int i = 0; i < 5; i++) {
+            medias[i] = calcularMedia(notas[i]);
+            situacoes[i] = determinarSituacao(medias[i]);
+        }
+
+        // Saída
+        imprimirRelatorio(nomes, medias, situacoes);
+        
+        sc.close();
+    }
+
+    // ====================== MÉTODOS ======================
+
+    public static String lerAluno(Scanner sc) {
+        System.out.print("Nome: ");
+        return sc.nextLine();
+    }
+
+    public static double[] lerNotas(Scanner sc) {
+        double[] notasAluno = new double[3];
+        System.out.println("Digite as 3 notas:");
+        for (int j = 0; j < 3; j++) {
+            System.out.printf("Nota %d: ", j + 1);
+            notasAluno[j] = sc.nextDouble();
+        }
+        sc.nextLine(); // limpar buffer
+        return notasAluno;
+    }
+
+    public static double calcularMedia(double[] notas) {
+        double soma = 0;
+        for (double nota : notas) {
+            soma += nota;
+        }
+        return soma / 3.0;
+    }
+
+    public static String determinarSituacao(double media) {
+        if (media >= 7.0) {
+            return "APROVADO";
+        } else if (media >= 5.0) {
+            return "RECUPERAÇÃO";
+        } else {
+            return "REPROVADO";
+        }
+    }
+
+    public static void imprimirRelatorio(String[] nomes, double[] medias, String[] situacoes) {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("               RELATÓRIO FINAL");
+        System.out.println("=".repeat(50));
+        System.out.printf("%-20s %-8s %s%n", "ALUNO", "MÉDIA", "SITUAÇÃO");
+        System.out.println("-".repeat(50));
+
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("%-20s %-8.2f %s%n", 
+                nomes[i], medias[i], situacoes[i]);
+        }
+        System.out.println("=".repeat(50));
+    }
+}
