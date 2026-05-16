@@ -1,0 +1,44 @@
+// ====================== CLASSE PRODUTO ======================
+class Produto {
+    String nome;
+    double preco;
+
+    // Construtor para facilitar a criação
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+}
+
+// ====================== CLASSE PRINCIPAL ======================
+public class PassagemReferenciaObjeto {
+
+    public static void aplicarDesconto(Produto p) {
+        System.out.println("   Dentro do método aplicarDesconto:");
+        System.out.println("   Preço ANTES do desconto: R$ " + p.preco);
+        
+        // Alterando o objeto (modifica o objeto original)
+        p.preco = p.preco * 0.90;  // Desconto de 10%
+        
+        System.out.println("   Preço DEPOIS do desconto: R$ " + p.preco);
+        System.out.println("   Fim do método aplicarDesconto.\n");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== DEMONSTRAÇÃO COM OBJETOS ===\n");
+        
+        // Criando o objeto
+        Produto produto = new Produto("Notebook Dell", 4500.00);
+        
+        System.out.println("No método main:");
+        System.out.println("Preço ANTES de chamar o método: R$ " + produto.preco);
+        
+        // Chamando o método
+        aplicarDesconto(produto);
+        
+        System.out.println("No método main:");
+        System.out.println("Preço DEPOIS de chamar o método: R$ " + produto.preco);
+        
+        System.out.println("====================================");
+    }
+}
