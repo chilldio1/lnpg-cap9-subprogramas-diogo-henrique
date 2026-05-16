@@ -1,0 +1,94 @@
+# ====================== VERSÃO MONOLÍTICA ======================
+print("=== Sistema de Vendas - Versão Monolítica ===\n")
+
+# Leitura dos dados
+produto = input("Digite o nome do produto: ").strip()
+quantidade = int(input("Digite a quantidade: "))
+preco_unitario = float(input("Digite o preço unitário (R$): "))
+# Cálculos
+subtotal = quantidade * preco_unitario
+# Desconto
+if subtotal > 500:
+    desconto = subtotal * 0.10
+    percentual = "10%"
+elif subtotal > 200:
+    desconto = subtotal * 0.05
+    percentual = "5%"
+else:
+    desconto = 0
+    percentual = "0%"
+total_final = subtotal - desconto
+# Impressão do cupom
+print("\n" + "="*40)
+print("          CUPOM FISCAL")
+print("="*40)
+print(f"Produto:          {produto}")
+print(f"Quantidade:       {quantidade}")
+print(f"Preço Unitário:   R$ {preco_unitario:.2f}")
+print(f"Subtotal:         R$ {subtotal:.2f}")
+print(f"Desconto ({percentual}):  R$ {desconto:.2f}")
+print("-" * 40)
+print(f"TOTAL A PAGAR:    R$ {total_final:.2f}")
+print("="*40)
+_____________________________________________________________
+# ====================== VERSÃO COM FUNÇÕES ======================
+
+def ler_produto():
+    """Lê os dados do produto"""
+    nome = input("Digite o nome do produto: ").strip()
+    quantidade = int(input("Digite a quantidade: "))
+    preco = float(input("Digite o preço unitário (R$): "))
+    return nome, quantidade, preco
+
+
+def calcular_subtotal(quantidade: int, preco_unitario: float) -> float:
+    """Calcula o subtotal"""
+    return quantidade * preco_unitario
+
+
+def calcular_desconto(subtotal: float) -> tuple[float, str]:
+    """Calcula o desconto e retorna (valor_desconto, percentual)"""
+    if subtotal > 500:
+        return subtotal * 0.10, "10%"
+    elif subtotal > 200:
+        return subtotal * 0.05, "5%"
+    else:
+        return 0.0, "0%"
+
+
+def calcular_total(subtotal: float, desconto: float) -> float:
+    """Calcula o valor total final"""
+    return subtotal - desconto
+
+
+def imprimir_cupom(produto: str, quantidade: int, preco_unitario: float,
+                   subtotal: float, desconto: float, percentual: str, total: float):
+    """Imprime o cupom formatado"""
+    print("\n" + "="*40)
+    print("          CUPOM FISCAL")
+    print("="*40)
+    print(f"Produto:          {produto}")
+    print(f"Quantidade:       {quantidade}")
+    print(f"Preço Unitário:   R$ {preco_unitario:.2f}")
+    print(f"Subtotal:         R$ {subtotal:.2f}")
+    print(f"Desconto ({percentual}):  R$ {desconto:.2f}")
+    print("-" * 40)
+    print(f"TOTAL A PAGAR:    R$ {total:.2f}")
+    print("="*40)
+
+
+# ====================== PROGRAMA PRINCIPAL ======================
+if __name__ == "__main__":
+    print("=== Sistema de Vendas ===\n")
+    
+    # Leitura
+    produto, quantidade, preco_unitario = ler_produto()
+    
+    # Cálculos
+    subtotal = calcular_subtotal(quantidade, preco_unitario)
+    desconto, percentual = calcular_desconto(subtotal)
+    total_final = calcular_total(subtotal, desconto)
+    
+    # Impressão
+    imprimir_cupom(produto, quantidade, preco_unitario, subtotal, 
+                   desconto, percentual, total_final)
